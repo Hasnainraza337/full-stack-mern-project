@@ -20,7 +20,7 @@ const register = async (req, res) => {
 
         const userCreated = await User.create({ userName, email, phone, password });
 
-        res.status(200).send(userCreated);
+        res.status(201).send(userCreated);
 
     } catch (error) {
         console.log("Error occure while user register", error);
