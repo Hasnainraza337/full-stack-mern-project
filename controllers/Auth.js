@@ -20,7 +20,11 @@ const register = async (req, res) => {
 
         const userCreated = await User.create({ userName, email, phone, password });
 
-        res.status(201).send(userCreated);
+        res.status(201).send({
+            message: "registeration successfuly",
+            token: await generateToken(),
+            userId: userCreated._id.toString()
+        });
 
     } catch (error) {
         console.log("Error occure while user register", error);
