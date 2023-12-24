@@ -22,7 +22,7 @@ const register = async (req, res) => {
 
         res.status(201).send({
             message: "registeration successfuly",
-            token: await generateToken(),
+            token: await userCreated.generateToken(),
             userId: userCreated._id.toString()
         });
 
