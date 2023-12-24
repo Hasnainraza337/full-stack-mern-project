@@ -1,4 +1,5 @@
 const User = require("../models/userModel")
+const bcrypt = require("bcryptjs")
 const home = async (req, res) => {
     try {
         res.status(200).send("welcom to our page by using router controllers")
@@ -27,9 +28,40 @@ const register = async (req, res) => {
         });
 
     } catch (error) {
-        console.log("Error occure while user register", error);
+        res.status(500).json({ message: "Internal Server error while user login" })
+        console.log("Internal Server error while user register", error);
+    }
+}
+// Login
+const login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        const userExist = await User.findOne({ email: email });
+
+        if (!userExist) {
+            return res.status(400).json({ message: "Invalid email or password" })
+        }
+
+        // const user = await bcrypt.compare(password, userExist.password);
+        const user = await userExist.comparePassword(password);
+
+        if (user) {
+            res.status(200).send({
+                message: "login successfuly",
+                token: await userExist.generateToken(),
+                userId: userExist._id.toString()
+            });
+        } else {
+            res.status(401).json({ message: "Invalid email or password" })
+        }
+
+
+    } catch (error) {
+        res.status(500).json({ message: "Internal Server error while user login" })
+        console.log("Internal Server error while user login", error);
     }
 }
 
 
-module.exports = { home, register };
+module.exports = { home, register, login };
