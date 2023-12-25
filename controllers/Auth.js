@@ -4,11 +4,11 @@ const home = async (req, res) => {
     try {
         res.status(200).send("welcom to our page by using router controllers")
     } catch (error) {
-        console.log(error); 
+        console.log(error);
     }
 }
 
-// Register
+// Register route logic
 const register = async (req, res) => {
     try {
         const { userName, email, phone, password } = req.body;
@@ -32,7 +32,7 @@ const register = async (req, res) => {
         console.log("Internal Server error while user register", error);
     }
 }
-// Login
+// Login route logic
 const login = async (req, res) => {
     try {
         const { email, password } = req.body;
@@ -63,5 +63,6 @@ const login = async (req, res) => {
     }
 }
 
+ 
 
 module.exports = { home, register, login };
