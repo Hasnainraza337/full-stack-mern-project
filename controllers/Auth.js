@@ -4,7 +4,7 @@ const home = async (req, res) => {
     try {
         res.status(200).send("welcom to our page by using router controllers")
     } catch (error) {
-        console.log(error);
+        console.log(error); 
     }
 }
 
