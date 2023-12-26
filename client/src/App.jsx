@@ -1,9 +1,10 @@
 import React from 'react'
+import Routes from "./pages/Routes"
 
 export default function App() {
   return (
     <>
-      <h1 style={{ textAlign: "center" }}>Hello World!</h1>
+      <Routes />
     </>
   )
 }
