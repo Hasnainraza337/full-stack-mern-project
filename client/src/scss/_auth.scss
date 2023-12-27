@@ -1,0 +1,67 @@
+.Auth {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .register-parent {
+
+        .register-img {
+            text-align: center;
+
+            .form-img {
+                width: 500px;
+                height: 500px;
+            }
+        }
+
+        .login-form {
+            margin-top: 100px;
+        }
+
+    }
+
+
+    @media screen and (max-width: 992px) {
+        .register-parent {
+            .login-form {
+                margin-top: 0px;
+            }
+        }
+
+        .register-form {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .submitbtn {
+                display: flex;
+                justify-content: center;
+            }
+        }
+    }
+
+    @media screen and (max-width: 520px) {
+        .register-parent {
+            .register-img {
+                .form-img {
+                    width: 400px;
+                    height: 350px;
+                }
+            }
+
+        }
+    }
+
+    @media screen and (max-width: 420px) {
+        .register-parent {
+            .register-img {
+                .form-img {
+                    width: 350px;
+                    height: 350px;
+                }
+            }
+
+        }
+    }
+}

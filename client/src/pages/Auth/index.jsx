@@ -6,7 +6,7 @@ import Login from './Login'
 export default function index() {
     return (
         <>
-            <main>
+            <main className='Auth'>
                 <Routes>
                     <Route path="/register" element={<Register />} />
                     <Route path="/login" element={<Login />} />
