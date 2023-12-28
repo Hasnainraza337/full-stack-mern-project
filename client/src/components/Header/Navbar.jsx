@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useAuthContext } from '../../contexts/AuthContext'
 
 export default function Navbar() {
+    const { isLoggedIn } = useAuthContext();
     return (
         <>
             <header>
@@ -25,13 +27,20 @@ export default function Navbar() {
                                 <li className="nav-item">
                                     <Link to='/contact' className="nav-link" >Contact</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/auth/login" className="nav-link" >Login</Link>
-                                </li>
-                                <li className="nav-item">
-                                    <Link to="/auth/register" className="nav-link" >Register</Link>
-                                </li>
-
+                                {isLoggedIn ? (
+                                    <li className="nav-item">
+                                        <Link to="/auth/logout" className="nav-link" >Logout</Link>
+                                    </li>
+                                ) : (
+                                    <>
+                                        <li className="nav-item">
+                                            <Link to="/auth/login" className="nav-link" >Login</Link>
+                                        </li>
+                                        <li className="nav-item">
+                                            <Link to="/auth/register" className="nav-link" >Register</Link>
+                                        </li>
+                                    </>
+                                )}
 
                             </ul>
 
