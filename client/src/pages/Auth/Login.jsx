@@ -3,6 +3,7 @@ import { Button, Form, Input } from 'antd';
 import login from "../../assets/images/login.png"
 import { MailOutlined, UnlockOutlined } from '@ant-design/icons'
 import { useNavigate } from "react-router-dom"
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const initialState = { email: "", Password: "" };
 const URL = "http://localhost:8000/api/auth/login"
@@ -10,7 +11,7 @@ const URL = "http://localhost:8000/api/auth/login"
 export default function Login() {
   const [state, setState] = useState(initialState)
   const navigate = useNavigate();
-
+  const { storeTokenInLs } = useAuthContext();
   const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +29,9 @@ export default function Login() {
 
       })
       if (response.ok) {
+        const res_data = await response.json();
+        console.log(res_data)
+        storeTokenInLs(res_data.token)
         form.resetFields();
         navigate("/")
       }

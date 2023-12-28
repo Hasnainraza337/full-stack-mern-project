@@ -3,6 +3,7 @@ import { Button, Form, Input, } from 'antd';
 import signup from "../../assets/images/new-user-registration.webp"
 import { useNavigate } from "react-router-dom"
 import { UserOutlined, MailOutlined, PhoneOutlined, UnlockOutlined } from '@ant-design/icons'
+import { useAuthContext } from '../../contexts/AuthContext';
 
 const initialState = { userName: "", email: "", phone: "", Password: "" };
 const URL = "http://localhost:8000/api/auth/register"
@@ -10,7 +11,7 @@ const URL = "http://localhost:8000/api/auth/register"
 export default function Register() {
   const [state, setState] = useState(initialState)
   const navigate = useNavigate();
-
+  const { storeTokenInLs } = useAuthContext();
   const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +29,8 @@ export default function Register() {
 
       })
       if (response.ok) {
+        const res_data = await response.json();
+        storeTokenInLs(res_data.token)
         form.resetFields();
         navigate("/auth/login")
       }
