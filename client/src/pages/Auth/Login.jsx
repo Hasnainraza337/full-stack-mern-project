@@ -41,7 +41,6 @@ export default function Login() {
                       <Form.Item
                         label={<label className='label' style={{ color: "white" }}>Email</label>}
                         name="email"
-                        style={{ color: "white" }}
                         hasFeedback
                         rules={[
                           {
@@ -57,7 +56,6 @@ export default function Login() {
                       <Form.Item
                         label={<label className='label' style={{ color: "white" }}>Password</label>}
                         name="password"
-                        style={{ color: "white" }}
                         hasFeedback
                         rules={[
                           {

@@ -1,15 +1,24 @@
- @import "./scss/bootsrtap";
- @import "./scss/auth";
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Poppins&family=Roboto&display=swap');
+@import "./scss/bootsrtap";
+@import "./scss/auth";
+@import "./scss/home";
+@import "./scss/noPage";
 
 
- #root {
-     display: flex;
-     flex-direction: column;
-     min-height: 100vh;
- }
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
 
- main {
-     flex: 1 0 auto;
-     background-color: #003049;
-     color: #fff;
- }
+main {
+    flex: 1 0 auto;
+    background-color: #003049;
+    color: #fff;
+}
+
+
+// footer background color
+.footer {
+    background-color: #669bbc;
+}
