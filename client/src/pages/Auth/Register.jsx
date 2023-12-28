@@ -1,21 +1,39 @@
 import React, { useState } from 'react'
-import { Button, Form, Input, InputNumber } from 'antd';
+import { Button, Form, Input, } from 'antd';
 import signup from "../../assets/images/new-user-registration.webp"
+import { useNavigate } from "react-router-dom"
 import { UserOutlined, MailOutlined, PhoneOutlined, UnlockOutlined } from '@ant-design/icons'
 
 const initialState = { userName: "", email: "", phone: "", Password: "" };
+const URL = "http://localhost:8000/api/auth/register"
 
 export default function Register() {
   const [state, setState] = useState(initialState)
+  const navigate = useNavigate();
 
-
+  const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState(s => ({ ...s, [name]: value }))
   }
 
-  const onFinish = () => {
-    console.log(state)
+  const handleRegister = async () => {
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(state)
+
+      })
+      if (response.ok) {
+        form.resetFields();
+        navigate("/auth/login")
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
 
@@ -36,9 +54,10 @@ export default function Register() {
                   <div className='register-form'>
                     <h2 className='mb-4'>Registration Form</h2>
                     <Form
+                      form={form}
                       layout='vertical'
                       autoComplete="off"
-                      onFinish={onFinish}
+                      onFinish={handleRegister}
                     >
                       <Form.Item
                         label={<label style={{ color: "white" }}>Username</label>}

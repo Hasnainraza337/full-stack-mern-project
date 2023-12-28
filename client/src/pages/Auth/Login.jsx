@@ -2,19 +2,38 @@ import React, { useState } from 'react'
 import { Button, Form, Input } from 'antd';
 import login from "../../assets/images/login.png"
 import { MailOutlined, UnlockOutlined } from '@ant-design/icons'
+import { useNavigate } from "react-router-dom"
 
 const initialState = { email: "", Password: "" };
+const URL = "http://localhost:8000/api/auth/login"
 
 export default function Login() {
   const [state, setState] = useState(initialState)
+  const navigate = useNavigate();
 
+  const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState(s => ({ ...s, [name]: value }))
   }
 
-  const onFinish = () => {
-    console.log(state)
+  const handleLogin = async () => {
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(state)
+
+      })
+      if (response.ok) {
+        form.resetFields();
+        navigate("/")
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
@@ -33,9 +52,10 @@ export default function Login() {
                   <div className='register-form login-form'>
                     <h2 className='mb-5'>Login Form</h2>
                     <Form
+                      form={form}
                       layout='vertical'
                       autoComplete="off"
-                      onFinish={onFinish}
+                      onFinish={handleLogin}
                     >
 
                       <Form.Item
