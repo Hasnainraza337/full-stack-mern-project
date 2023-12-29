@@ -11,7 +11,7 @@ const userMiddleware = async (req, res, next) => {
 
     // Assuming the token formet "bearer <jwtToken>",removing the bearer prefix
     const jwtToken = token.replace("Bearer", "").trim()
-    console.log("withot bearer", jwtToken)
+    // console.log("withot bearer", jwtToken)
     try {
         const isVarified = jwt.verify(jwtToken, process.env.SECRET_KEY)
 

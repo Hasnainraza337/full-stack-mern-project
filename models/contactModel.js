@@ -4,16 +4,17 @@ const mongoose = require("mongoose");
 const contactSchema = new mongoose.Schema({
     userName: {
         type: String,
-        require: true
+        required: true
     },
     email: {
         type: String,
-        require: true,
-        unique: true
+        required: true,
+
     },
     message: {
         type: String,
-        require: true
+        required: true,
+
     },
 
 })

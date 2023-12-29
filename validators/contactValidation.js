@@ -15,7 +15,7 @@ const contactSchema = z.object({
         .max(30, { message: "Email cannot  more than 30 charcters" }),
     message: z
         .string({ required_error: "Message is required" })
-        .min(20, { message: "Message must be at least 20 charcters" })
+        .min(5, { message: "Message must be at least 5 charcters" })
         .max(300, { message: "Message cannot  more than 300 charcters" }),
 
 

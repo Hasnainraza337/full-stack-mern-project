@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import { Button, Form, Input } from 'antd';
 import contactimg from "../../../assets/images/contact.webp"
 import { useAuthContext } from '../../../contexts/AuthContext';
-
+const initialState = { userName: "", email: "", message: "" }
+const URL = "http://localhost:8000/api/form/contact"
 
 export default function Contact() {
   // const [form] = Form.useForm()
-  const [state, setState] = useState({ userName: "", email: "", message: "" })
+  const [state, setState] = useState(initialState)
   const [userData, setUserData] = useState(true)
   const { user } = useAuthContext();
 
@@ -25,9 +26,26 @@ export default function Contact() {
     setState(s => ({ ...s, [name]: value }))
   }
 
-  const handleContact = (e) => {
-    e.preventDefault()
-    console.log(state)
+  const handleContact = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(state)
+
+      });
+      console.log(response)
+      if (response.ok) {
+        alert("msg send successfully")
+        setState(initialState)
+      }
+    } catch (error) {
+      console.log(error)
+    }
   };
 
 
@@ -53,19 +71,19 @@ export default function Contact() {
                 <form >
                   <div className="row">
                     <div className="col">
-                      <label name="userName">UserName</label><br />
+                      <label htmlFor='userName'>UserName</label><br />
                       <input type="text" name='userName' required value={state.userName} className='form-control mt-1' onChange={handleChange} />
                     </div>
                   </div>
                   <div className="row mt-3">
                     <div className="col">
-                      <label name="email">Email</label><br />
+                      <label htmlFor='email'>Email</label><br />
                       <input type="email" name='email' required value={state.email} className='form-control mt-1' onChange={handleChange} />
                     </div>
                   </div>
                   <div className="row mt-3">
                     <div className="col">
-                      <label name="message">Message</label><br />
+                      <label htmlFor='message'>Message</label><br />
                       <textarea name="message" required value={state.message} cols="30" rows="5" className='form-control mt-1' onChange={handleChange} />
                     </div>
                   </div>
