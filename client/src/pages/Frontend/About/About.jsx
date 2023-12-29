@@ -1,15 +1,17 @@
 import { Button } from 'antd'
 import React from 'react'
 import Aboutimg from "../../../assets/images/about.webp"
+import { useAuthContext } from '../../../contexts/AuthContext'
 
 export default function About() {
+  const { user } = useAuthContext();
   return (
     <>
       <section className='hero-section py-3'>
         <div className="container">
           <div className="row hero-flex">
             <div className="col-12 col-lg-6 mt-4 mt-lg-0 ">
-              <p className='mb-0'>Welcom, Hasnain Raza</p>
+              <p className='mb-0'>Welcom, {user.userName}</p>
               <h1>Why Chose Us?</h1>
               <p>
                 Experties: Our team consists of experienced IT Professional
