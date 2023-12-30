@@ -4,6 +4,7 @@ import signup from "../../assets/images/new-user-registration.webp"
 import { useNavigate } from "react-router-dom"
 import { UserOutlined, MailOutlined, PhoneOutlined, UnlockOutlined } from '@ant-design/icons'
 import { useAuthContext } from '../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 
 const initialState = { userName: "", email: "", phone: "", Password: "" };
 const URL = "http://localhost:8000/api/auth/register"
@@ -28,11 +29,14 @@ export default function Register() {
         body: JSON.stringify(state)
 
       })
+      const res_data = await response.json();
       if (response.ok) {
-        const res_data = await response.json();
         storeTokenInLs(res_data.token)
         form.resetFields();
-        navigate("/auth/login")
+        toast.success("Registeration Successfull")
+        navigate("/")
+      } else {
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
       }
     } catch (error) {
       console.log(error)
@@ -66,14 +70,14 @@ export default function Register() {
                         label={<label style={{ color: "white" }}>Username</label>}
                         name="userName"
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your username!',
-                          },
-                          { whitespace: true, },
-                          { min: 3 }
-                        ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your username!',
+                      //   },
+                      //   { whitespace: true, },
+                      //   { min: 3 }
+                      // ]}
                       >
                         <Input name="userName" prefix={<UserOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                       </Form.Item>
@@ -81,13 +85,13 @@ export default function Register() {
                         label={<label style={{ color: "white" }}>Email</label>}
                         name="email"
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your valid email!',
-                          },
-                          { type: 'email', message: 'Please enter a valid email.' }
-                        ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your valid email!',
+                      //   },
+                      //   { type: 'email', message: 'Please enter a valid email.' }
+                      // ]}
                       >
                         <Input name='email' prefix={<MailOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                       </Form.Item>
@@ -95,13 +99,13 @@ export default function Register() {
                         label={<label style={{ color: "white" }}>Phone</label>}
                         name='phone'
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your Phone Number!',
-                          },
-                          { min: 10 }
-                        ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your Phone Number!',
+                      //   },
+                      //   { min: 10 }
+                      // ]}
                       >
                         <Input name='phone' prefix={<PhoneOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                         {/* <InputNumber name='phone' prefix={<PhoneOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} /> */}
@@ -111,18 +115,18 @@ export default function Register() {
                         label={<label style={{ color: "white" }}>Password</label>}
                         name="password"
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your password!',
-                          },
-                          {
-                            min: 7,
-                            message: "password must be at least 7 character"
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your password!',
+                      //   },
+                      //   {
+                      //     min: 7,
+                      //     message: "password must be at least 7 character"
 
-                          }
+                      //   }
 
-                        ]}
+                      // ]}
                       >
                         <Input.Password name='password' prefix={<UnlockOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                       </Form.Item>

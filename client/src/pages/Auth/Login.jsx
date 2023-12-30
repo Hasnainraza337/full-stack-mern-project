@@ -4,6 +4,7 @@ import login from "../../assets/images/login.png"
 import { MailOutlined, UnlockOutlined } from '@ant-design/icons'
 import { useNavigate } from "react-router-dom"
 import { useAuthContext } from '../../contexts/AuthContext';
+import { toast } from "react-toastify"
 
 const initialState = { email: "", Password: "" };
 const URL = "http://localhost:8000/api/auth/login"
@@ -28,12 +29,15 @@ export default function Login() {
         body: JSON.stringify(state)
 
       })
+      const res_data = await response.json();
       if (response.ok) {
-        const res_data = await response.json();
         console.log(res_data)
         storeTokenInLs(res_data.token)
         form.resetFields();
+        toast.success("Login Successfull")
         navigate("/")
+      } else {
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
       }
     } catch (error) {
       console.log(error)
@@ -66,13 +70,13 @@ export default function Login() {
                         label={<label className='label' style={{ color: "white" }}>Email</label>}
                         name="email"
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your valid email!',
-                          },
-                          { type: 'email', message: 'Please enter a valid email.' }
-                        ]}
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your valid email!',
+                      //   },
+                      //   { type: 'email', message: 'Please enter a valid email.' }
+                      // ]}
                       >
                         <Input name='email' prefix={<MailOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                       </Form.Item>
@@ -81,18 +85,18 @@ export default function Login() {
                         label={<label className='label' style={{ color: "white" }}>Password</label>}
                         name="password"
                         hasFeedback
-                        rules={[
-                          {
-                            required: true,
-                            message: 'Please input your password!',
-                          },
-                          {
-                            min: 7,
-                            message: "password must be at least 7 character"
+                      // rules={[
+                      //   {
+                      //     required: true,
+                      //     message: 'Please input your password!',
+                      //   },
+                      //   {
+                      //     min: 7,
+                      //     message: "password must be at least 7 character"
 
-                          }
+                      //   }
 
-                        ]}
+                      // ]}
                       >
                         <Input.Password name='password' prefix={<UnlockOutlined />} style={{ width: 350, borderRadius: 5 }} onChange={handleChange} />
                       </Form.Item>

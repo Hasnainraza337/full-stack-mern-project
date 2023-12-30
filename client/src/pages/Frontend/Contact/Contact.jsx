@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Button, Form, Input } from 'antd';
 import contactimg from "../../../assets/images/contact.webp"
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { toast } from 'react-toastify';
 const initialState = { userName: "", email: "", message: "" }
 const URL = "http://localhost:8000/api/form/contact"
 
@@ -38,10 +39,13 @@ export default function Contact() {
         body: JSON.stringify(state)
 
       });
-      console.log(response)
+      // console.log(response)
+      const res_data = await response.json();
       if (response.ok) {
-        alert("msg send successfully")
+        toast.success("message send successfull")
         setState(initialState)
+      } else {
+        toast.error(res_data.extraDetails ? res_data.extraDetails : res_data.message)
       }
     } catch (error) {
       console.log(error)
