@@ -5,6 +5,7 @@ const app = express()
 const dbConnect = require("./utils/dbConection")
 const authRouter = require("./Router/Auth");
 const contactRouter = require("./Router/Contact");
+const serviceRouter = require("./Router/Service");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
 const corsoptions = {
@@ -19,6 +20,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRouter)
 app.use("/api/form", contactRouter)
+app.use("/api/data", serviceRouter)
 
 
 
