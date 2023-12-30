@@ -2,6 +2,7 @@ import { Button } from 'antd'
 import React from 'react'
 import Aboutimg from "../../../assets/images/about.webp"
 import { useAuthContext } from '../../../contexts/AuthContext'
+import { Link } from "react-router-dom"
 
 export default function About() {
   const { user } = useAuthContext();
@@ -36,8 +37,8 @@ export default function About() {
                 to ensuring your IT environment is reliable and available 24/7.
               </p>
               <div className='mt-5'>
-                <Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button>
-                <Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button>
+                <Link to="/contact"><Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button></Link>
+                <Link to="/services"><Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button></Link>
               </div>
             </div>
             <div className="col-12 col-lg-6">

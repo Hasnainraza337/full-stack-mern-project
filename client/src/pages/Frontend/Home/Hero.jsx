@@ -2,6 +2,7 @@ import { Button } from 'antd'
 import React from 'react'
 import Home from "../../../assets/images/Home.webp"
 import Getstarted from "../../../assets/images/getstarted.webp"
+import { Link } from "react-router-dom"
 
 export default function Hero() {
   return (
@@ -18,8 +19,8 @@ export default function Hero() {
                 meet your unique needs.
               </p>
               <div className='mt-5'>
-                <Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button>
-                <Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button>
+                <Link to="/contact"><Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button></Link>
+                <Link to="/services" ><Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button></Link>
               </div>
             </div>
             <div className="col-12 col-lg-6">
@@ -71,8 +72,8 @@ export default function Hero() {
                   how we can help your business  thrive in the digitel age.
                 </p>
                 <div className='mt-5  getstarted-btn'>
-                  <Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button>
-                  <Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button>
+                  <Link to="/contact"><Button type='primary' style={{ marginRight: 20, borderRadius: 5 }}>Connect Now</Button></Link>
+                  <Link to="/services"><Button style={{ background: "transparent", color: "white", borderRadius: 5 }}>Learn More</Button></Link>
                 </div>
               </div>
             </div>
