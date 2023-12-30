@@ -12,7 +12,7 @@ export default function About() {
         <div className="container">
           <div className="row hero-flex">
             <div className="col-12 col-lg-6 mt-4 mt-lg-0 ">
-              <p className='mb-0'>Welcom, {user.userName}</p>
+              <p className='mb-0'>{user ? `Welcom, ${user.userName} to our about` : `Welcom, to our about`}</p>
               <h1>Why Chose Us?</h1>
               <p>
                 Experties: Our team consists of experienced IT Professional
