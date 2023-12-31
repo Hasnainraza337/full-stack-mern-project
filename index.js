@@ -6,6 +6,7 @@ const dbConnect = require("./utils/dbConection")
 const authRouter = require("./Router/Auth");
 const contactRouter = require("./Router/Contact");
 const serviceRouter = require("./Router/Service");
+const adminRouter = require("./Router/Admin");
 const errorMiddleware = require("./middlewares/errorMiddleware");
 
 const corsoptions = {
@@ -22,7 +23,8 @@ app.use("/api/auth", authRouter)
 app.use("/api/form", contactRouter)
 app.use("/api/data", serviceRouter)
 
-
+// admin route
+app.use("/api/admin", adminRouter)
 
 
 
