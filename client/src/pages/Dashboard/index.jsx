@@ -5,13 +5,14 @@ import Users from './Users'
 import Contacts from './Contacts'
 import NoPage from '../Frontend/NoPage'
 import Sider from '../../components/Sider'
+import { Space } from 'antd'
 
 export default function index() {
     return (
         <>
-            <div className='d-flex'>
-                <Sider />
-                <main id='dashboardMain'>
+            <Space style={{columnGap:0}}>
+                <Sider />      
+                <div>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/users" element={<Users />} />
@@ -19,8 +20,8 @@ export default function index() {
                         {/* <Route path="/services" element={<User />} /> */}
                         <Route path="*" element={<NoPage />} />
                     </Routes>
-                </main>
-            </div>
+                </div>
+            </Space>
         </>
     )
 }

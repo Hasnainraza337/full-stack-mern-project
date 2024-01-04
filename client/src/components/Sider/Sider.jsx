@@ -1,38 +1,44 @@
+import { Menu } from 'antd'
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { AppstoreOutlined, UserOutlined, ContactsOutlined, HomeOutlined } from "@ant-design/icons"
+import { useNavigate } from 'react-router-dom'
 
 export default function Sider() {
+    const navigate = useNavigate();
     return (
         <>
-            <header style={{ minHeight: "100vh", width: 200 }}>
-                <nav>
-                    <div class="position-sticky">
-                        <ul class="nav flex-column">
-                            <li class="nav-item">
-                                <Link to="/dashboard" class="nav-link active">
-                                    Dashboard
-                                </Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to="/dashboard/users" class="nav-link">
-                                    Users
-                                </Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to="/dashboard/contacts" class="nav-link">
-                                    Contacts
-                                </Link>
-                            </li>
-                            <li class="nav-item">
-                                <Link to="/" class="nav-link">
-                                    Home
-                                </Link>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-            </header>
+            <Menu
+                style={{
+                    width: 200,
+                    height: "100vh",
+                    
+                }}
+                defaultSelectedKeys={"/dashboard"}
+                onClick={(item) => {
+                    navigate(item.key)
+                }}
+                items={[
+                    {
+                        key: "/dashboard",
+                        icon: <AppstoreOutlined />,
+                        label: "Dashboard",
+                    },
+                    {
+                        key: "/dashboard/users",
+                        icon: <UserOutlined />,
+                        label: "Users",
+                    },
+                    {
+                        key: "/dashboard/contacts",
+                        icon: <ContactsOutlined />,
+                        label: "Contacts",
+                    },
+                    {
+                        key: "/",
+                        icon: <HomeOutlined />,
+                        label: "Home",
+                    },
+                ]} />
         </>
     )
 }
