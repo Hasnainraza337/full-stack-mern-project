@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Card, Typography } from 'antd'
+import { Button, Card, Typography } from 'antd'
 import { FaUser } from "react-icons/fa";
 import { MdContactPhone } from "react-icons/md";
 import Chart from 'react-apexcharts'
+import { LuMenu } from "react-icons/lu";
+import { useDataContext } from '../../../contexts/DataContext';
 
 
 export default function Hero() {
+  const { users } = useDataContext();
   const [state, setState] = useState(
     {
       options: {
@@ -35,7 +38,7 @@ export default function Hero() {
         width: 380,
         type: 'pie',
       },
-      labels: ["Users","Contacts"],
+      labels: ["Users", "Contacts"],
       responsive: [{
         breakpoint: 480,
         options: {
@@ -53,7 +56,8 @@ export default function Hero() {
     <>
       <div className="container-fluid bg-light py-1">
         <div className="row">
-          <div className="col">
+          <div className="col dashHeader">
+            <p className='dashMenu'><LuMenu style={{ fontSize: 22, cursor: "pointer" }} /></p>
             <Typography.Title className='text-center'>Admin Dashboard</Typography.Title>
           </div>
         </div>
@@ -69,7 +73,7 @@ export default function Hero() {
               </div>
               <div className='d-flex justify-content-between align-items-center mt-3'>
                 <Typography.Title level={4}>Total Users</Typography.Title>
-                <p style={{ fontSize: 20, marginBottom: 0 }}>10</p>
+                <p style={{ fontSize: 20, marginBottom: 0 }}>{users.length}</p>
               </div>
             </Card>
           </div>
@@ -92,7 +96,7 @@ export default function Hero() {
       <div className="container mt-4">
         <div className="row">
           <div className="col-12 col-lg-6">
-            <Chart options={state.options} series={state.series} type="bar"  />
+            <Chart options={state.options} series={state.series} type="bar" />
           </div>
           <div className="col-12 col-lg-6">
             <Chart options={pie.options} series={pie.series} type="pie" height={350} />

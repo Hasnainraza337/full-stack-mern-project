@@ -9,7 +9,7 @@ export default function Sider() {
         <>
             <Menu
                 style={{
-                    width: 200,
+                    width: "200px",
                     height: "100vh",
                     position: "fixed",
                     top: 0,

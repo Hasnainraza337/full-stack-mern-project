@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 import { useAuthContext } from "../../../contexts/AuthContext"
 import { Table, } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { LuMenu } from "react-icons/lu";
+import { useDataContext } from '../../../contexts/DataContext';
 
 const columns = [
   {
@@ -44,29 +46,8 @@ const columns = [
 
 
 export default function User() {
-  const { authorizationToken } = useAuthContext();
-  const [users, setUsers] = useState([])
-  const getAllUsers = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/api/admin/users", {
-        method: "GET",
-        headers: {
-          Authorization: authorizationToken,
-        },
-      })
-      console.log(response)
-      if (response.ok) {
-        const usersData = await response.json();
-        setUsers(usersData.users)
-      }
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const { users } = useDataContext();
 
-  useEffect(() => {
-    getAllUsers()
-  }, [])
 
   const data = users.map((user, i) => {
     return {
@@ -83,7 +64,8 @@ export default function User() {
     <>
       <div className="container-fluid bg-light py-1">
         <div className="row">
-          <div className="col">
+          <div className="col dashHeader">
+            <p className='dashMenu'><LuMenu style={{ fontSize: 22, cursor: "pointer" }} /></p>
             <Typography.Title className='text-center'>Admin Users</Typography.Title>
           </div>
         </div>
@@ -91,7 +73,7 @@ export default function User() {
       <div className="container py-5">
         <div className="row">
           <div className="col">
-            <Table columns={columns} dataSource={data} scroll={{x:true}} />
+            <Table columns={columns} dataSource={data} scroll={{ x: true }} />
           </div>
         </div>
       </div>
