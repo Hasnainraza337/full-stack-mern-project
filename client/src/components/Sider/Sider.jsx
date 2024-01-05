@@ -11,9 +11,14 @@ export default function Sider() {
                 style={{
                     width: 200,
                     height: "100vh",
-                    
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    bottom: 0,
+                    overflow: "auto"
                 }}
                 defaultSelectedKeys={"/dashboard"}
+                defaultOpenKeys={"/dashboard"}
                 onClick={(item) => {
                     navigate(item.key)
                 }}

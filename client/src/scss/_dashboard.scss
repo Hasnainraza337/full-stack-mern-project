@@ -1,4 +1,7 @@
- .ant-space-item:last-child {
+.ant-space-item:first-child {
+    width: 200px;
+}
+.ant-space-item:last-child {
      height: 100vh;
      width: 100%;
  }
