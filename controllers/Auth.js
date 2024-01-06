@@ -46,11 +46,18 @@ const login = async (req, res) => {
         // const user = await bcrypt.compare(password, userExist.password);
         const user = await userExist.comparePassword(password);
 
+
+
         if (user) {
+            // Update lastLoginTimestamp before generating the token
+            userExist.lastLoginTimestamp = new Date();
+            await userExist.save();
+
             res.status(200).send({
                 message: "login successfuly",
                 token: await userExist.generateToken(),
-                userId: userExist._id.toString()
+                userId: userExist._id.toString(),
+                lastLoginTimestamp: userExist.lastLoginTimestamp,
             });
         } else {
             res.status(401).json({ message: "Invalid email or password" })

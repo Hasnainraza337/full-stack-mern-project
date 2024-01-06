@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Card, Typography } from 'antd'
 import { FaUser } from "react-icons/fa";
 import { MdContactPhone } from "react-icons/md";
@@ -8,50 +8,89 @@ import { useDataContext } from '../../../contexts/DataContext';
 
 
 export default function Hero() {
-  const { users } = useDataContext();
-  const [state, setState] = useState(
-    {
-      options: {
-        chart: {
-          id: 'apexchart-example'
-        },
-        xaxis: {
-          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
-        }
+  const { users, contacts } = useDataContext();
+  const currentDate = new Date();
+  const currentMonth = currentDate.getMonth() + 1;
+
+  const lastLoginTimestamp = users.filter(user => {
+    const userMonth = new Date(user.lastLoginTimestamp).getMonth() + 1;
+    return userMonth === currentMonth;
+  });
+
+  const filteredContacts = contacts.filter(contact => {
+    const contactMonth = new Date(contact.creationTimestamp).getMonth() + 1;
+    return contactMonth === currentMonth;
+  });
+
+  const [state, setState] = useState({
+    options: {
+      chart: {
+        id: 'apexchart-example',
       },
-      series: [{
-        name: 'Users',
-        data: [30, 40, 35, 50, 49, 60, 70, 91, 125]
+      xaxis: {
+        categories: ['Users', 'Contacts'],
+      },
+    },
+    series: [
+      {
+        name: 'Logged In Users',
+        data: [lastLoginTimestamp.length],
       },
       {
-        name: 'Contacts',
-        data: [10, 20, 30, 40, 45, 55, 67, 81, 98]
-      }
-      ]
-    }
-  )
+        name: 'Created Contacts',
+        data: [filteredContacts.length],
+      },
+    ],
+  });
+
 
   const [pie, setPie] = useState({
-    series: [44, 55,],
+    series: [users.length, contacts.length],
     options: {
       chart: {
         width: 380,
         type: 'pie',
       },
-      labels: ["Users", "Contacts"],
-      responsive: [{
-        breakpoint: 480,
-        options: {
-          chart: {
-            width: 200
+      labels: ['Users', 'Contacts'],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: 'bottom',
+            },
           },
-          legend: {
-            position: 'bottom'
-          }
-        }
-      }]
+        },
+      ],
     },
-  })
+  });
+
+
+  useEffect(() => {
+    // Update the state when users or contacts change
+    setState((prev) => ({
+      ...prev,
+      
+      series: [
+        {
+          name: 'Logged In Users',
+          data: [lastLoginTimestamp.length],
+        },
+        {
+          name: 'Created Contacts',
+          data: [filteredContacts.length],
+        },
+      ],
+    }));
+    setPie((prev) => ({
+      ...prev,
+      series: [users.length, contacts.length],
+    }));
+  }, [lastLoginTimestamp, filteredContacts]);
+
   return (
     <>
       <div className="container-fluid bg-light py-1">
@@ -87,7 +126,7 @@ export default function Hero() {
               </div>
               <div className='d-flex justify-content-between align-items-center mt-3'>
                 <Typography.Title level={4}>Total Contacts</Typography.Title>
-                <p style={{ fontSize: 20, marginBottom: 0 }}>10</p>
+                <p style={{ fontSize: 20, marginBottom: 0 }}>{contacts.length}</p>
               </div>
             </Card>
           </div>

@@ -1,6 +1,5 @@
+import React from 'react'
 import { Button, Typography } from 'antd'
-import React, { useEffect, useState } from 'react'
-import { useAuthContext } from "../../../contexts/AuthContext"
 import { Table, } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { LuMenu } from "react-icons/lu";
@@ -73,6 +72,7 @@ export default function User() {
       <div className="container py-5">
         <div className="row">
           <div className="col">
+
             <Table columns={columns} dataSource={data} scroll={{ x: true }} />
           </div>
         </div>

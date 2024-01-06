@@ -1,10 +1,11 @@
 import { Menu } from 'antd'
 import React from 'react'
 import { AppstoreOutlined, UserOutlined, ContactsOutlined, HomeOutlined } from "@ant-design/icons"
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
-export default function Sider() {
+export default function Sider({ selectedKey, openKeys }) {
     const navigate = useNavigate();
+    const location = useLocation();
     return (
         <>
             <Menu
@@ -17,8 +18,8 @@ export default function Sider() {
                     bottom: 0,
                     overflow: "auto"
                 }}
-                defaultSelectedKeys={"/dashboard"}
-                defaultOpenKeys={"/dashboard"}
+                defaultSelectedKeys={[selectedKey]}
+                defaultOpenKeys={[openKeys]}
                 onClick={(item) => {
                     navigate(item.key)
                 }}
