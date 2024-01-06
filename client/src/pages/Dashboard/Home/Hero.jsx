@@ -9,39 +9,11 @@ import { useDataContext } from '../../../contexts/DataContext';
 
 export default function Hero() {
   const { users, contacts } = useDataContext();
-  const currentDate = new Date();
-  const currentMonth = currentDate.getMonth() + 1;
 
-  const lastLoginTimestamp = users.filter(user => {
-    const userMonth = new Date(user.lastLoginTimestamp).getMonth() + 1;
-    return userMonth === currentMonth;
-  });
 
-  const filteredContacts = contacts.filter(contact => {
-    const contactMonth = new Date(contact.creationTimestamp).getMonth() + 1;
-    return contactMonth === currentMonth;
-  });
 
-  const [state, setState] = useState({
-    options: {
-      chart: {
-        id: 'apexchart-example',
-      },
-      xaxis: {
-        categories: ['Users', 'Contacts'],
-      },
-    },
-    series: [
-      {
-        name: 'Logged In Users',
-        data: [lastLoginTimestamp.length],
-      },
-      {
-        name: 'Created Contacts',
-        data: [filteredContacts.length],
-      },
-    ],
-  });
+
+
 
 
   const [pie, setPie] = useState({
@@ -71,25 +43,12 @@ export default function Hero() {
 
   useEffect(() => {
     // Update the state when users or contacts change
-    setState((prev) => ({
-      ...prev,
-      
-      series: [
-        {
-          name: 'Logged In Users',
-          data: [lastLoginTimestamp.length],
-        },
-        {
-          name: 'Created Contacts',
-          data: [filteredContacts.length],
-        },
-      ],
-    }));
+
     setPie((prev) => ({
       ...prev,
       series: [users.length, contacts.length],
     }));
-  }, [lastLoginTimestamp, filteredContacts]);
+  }, []);
 
   return (
     <>
@@ -134,9 +93,6 @@ export default function Hero() {
       </div>
       <div className="container mt-4">
         <div className="row">
-          <div className="col-12 col-lg-6">
-            <Chart options={state.options} series={state.series} type="bar" />
-          </div>
           <div className="col-12 col-lg-6">
             <Chart options={pie.options} series={pie.series} type="pie" height={350} />
           </div>

@@ -49,15 +49,10 @@ const login = async (req, res) => {
 
 
         if (user) {
-            // Update lastLoginTimestamp before generating the token
-            userExist.lastLoginTimestamp = new Date();
-            await userExist.save();
-
             res.status(200).send({
                 message: "login successfuly",
                 token: await userExist.generateToken(),
                 userId: userExist._id.toString(),
-                lastLoginTimestamp: userExist.lastLoginTimestamp,
             });
         } else {
             res.status(401).json({ message: "Invalid email or password" })
