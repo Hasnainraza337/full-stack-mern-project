@@ -4,6 +4,7 @@ import { Table, } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { LuMenu } from "react-icons/lu";
 import { useDataContext } from '../../../contexts/DataContext';
+import { Link } from "react-router-dom"
 
 
 
@@ -41,9 +42,9 @@ export default function User() {
       render: (text, record) => {
         return (
           <div>
-            <Button type='primary' style={{ borderRadius: 5 }}><EditOutlined style={{ fontSize: 20 }} /></Button>
+            <Link to={`/dashboard/users/${record.userId}/edit`}><Button type='primary' style={{ borderRadius: 5 }}><EditOutlined style={{ fontSize: 20 }} /></Button></Link>
             <Button type='primary' danger onClick={() => deleteUser(record.userId)} style={{ marginLeft: 5, borderRadius: 5 }}><DeleteOutlined style={{ fontSize: 20 }} /></Button>
-          </div>
+          </div >
         )
       },
 

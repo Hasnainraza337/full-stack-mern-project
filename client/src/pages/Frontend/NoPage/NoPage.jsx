@@ -18,10 +18,8 @@ export default function NoPage() {
                                     look into it.
                                 </p>
                                 <div className='errorpage-btn'>
-                                    <Space>
-                                        <Link to="/"><Button type='primary' className='btnn' style={{ background: "transparent" }}>RETURN HOME</Button></Link>
-                                        <Link to="/contact"><Button type='primary' className='btnn' style={{ background: "transparent" }}>REPORT PROBLEM</Button></Link>
-                                    </Space>
+                                    <Link to="/"><Button type='primary' style={{ background: "transparent" }}>RETURN HOME</Button></Link>
+                                    <Link to="/contact"><Button type='primary' className='ms-3' style={{ background: "transparent" }}>REPORT PROBLEM</Button></Link>
                                 </div>
                             </div>
                         </div>
