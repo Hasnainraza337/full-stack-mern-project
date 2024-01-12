@@ -13,6 +13,17 @@ const getAllUsers = async (req, res) => {
         next(error)
     }
 }
+
+// delete Users
+const deleteUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        await User.deleteOne({ _id: id })
+        return res.status(200).json({ message: "User deleted successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
 // get all user from data base 
 const getAllContacts = async (req, res) => {
     try {
@@ -27,4 +38,4 @@ const getAllContacts = async (req, res) => {
 }
 
 
-module.exports = { getAllUsers, getAllContacts };
+module.exports = { getAllUsers, getAllContacts, deleteUser };
