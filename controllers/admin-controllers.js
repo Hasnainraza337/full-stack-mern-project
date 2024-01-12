@@ -14,6 +14,16 @@ const getAllUsers = async (req, res) => {
     }
 }
 
+// get one User
+const getOneUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findOne({ _id: id }).select({ password: 0 })
+        return res.status(200).json({ user })
+    } catch (error) {
+        next(error)
+    }
+}
 // delete Users
 const deleteUser = async (req, res) => {
     try {
@@ -38,4 +48,4 @@ const getAllContacts = async (req, res) => {
 }
 
 
-module.exports = { getAllUsers, getAllContacts, deleteUser };
+module.exports = { getAllUsers, getAllContacts, deleteUser, getOneUser };
