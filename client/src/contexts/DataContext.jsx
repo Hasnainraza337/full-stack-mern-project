@@ -47,7 +47,7 @@ export const DataContextProvider = ({ children }) => {
             console.log(error)
         }
     }
-
+ 
     // get all contacts
     const getAllContacts = async () => {
         try {
@@ -67,15 +67,13 @@ export const DataContextProvider = ({ children }) => {
         }
     }
 
-
-
     useEffect(() => {
         getAllUsers()
         getAllContacts()
     }, [])
 
     return (
-        <DataContext.Provider value={{ users, contacts, deleteUser }}>
+        <DataContext.Provider value={{ users, contacts, deleteUser, }}>
             {children}
         </DataContext.Provider>
     )
