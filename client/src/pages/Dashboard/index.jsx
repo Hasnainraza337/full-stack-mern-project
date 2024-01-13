@@ -6,6 +6,7 @@ import Contacts from './Contacts'
 import NoPage from '../Frontend/NoPage'
 import Sider from '../../components/Sider'
 import { Space } from 'antd'
+import EditUser from './EditUser';
 
 export default function index() {
     const location = useLocation();
@@ -20,7 +21,7 @@ export default function index() {
                         <Route path="/" element={<Home />} />
                         <Route path="/users" element={<Users />} />
                         <Route path="/contacts" element={<Contacts />} />
-                        {/* <Route path="/services" element={<User />} /> */}
+                        <Route path="/users/:id/edit" element={<EditUser />} />
                         <Route path="*" element={<NoPage />} />
                     </Routes>
                 </div>
