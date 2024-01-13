@@ -24,12 +24,23 @@ const getOneUser = async (req, res) => {
         next(error)
     }
 }
-// delete Users
+// delete User
 const deleteUser = async (req, res) => {
     try {
         const id = req.params.id;
         await User.deleteOne({ _id: id })
         return res.status(200).json({ message: "User deleted successfully" })
+    } catch (error) {
+        next(error)
+    }
+}
+// update User
+const updateUser = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const updateUser = req.body;
+        const updateData = await User.updateOne({ _id: id }, { $set: updateUser })
+        return res.status(200).json(updateData)
     } catch (error) {
         next(error)
     }
@@ -48,4 +59,4 @@ const getAllContacts = async (req, res) => {
 }
 
 
-module.exports = { getAllUsers, getAllContacts, deleteUser, getOneUser };
+module.exports = { getAllUsers, getAllContacts, deleteUser, getOneUser, updateUser };
