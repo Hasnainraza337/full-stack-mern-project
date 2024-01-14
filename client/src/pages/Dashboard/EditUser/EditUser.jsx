@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Button } from 'antd';
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { toast } from "react-toastify"
 
 const initialState = { userName: "", email: "", phone: "" }
 
@@ -9,6 +10,7 @@ export default function EditUser() {
     const [state, setState] = useState(initialState)
     const { authorizationToken } = useAuthContext()
     const params = useParams()
+    const navigate = useNavigate()
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -33,6 +35,30 @@ export default function EditUser() {
             console.log(error)
         }
     }
+
+    // update user
+    const handleUpdate = async (e) => {
+        e.preventDefault()
+        try {
+            const response = await fetch(`http://localhost:8000/api/admin/users/update/${params.id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: authorizationToken,
+                },
+                body: JSON.stringify(state)
+            })
+            if (response.ok) {
+                toast.success("User update successfully")
+                navigate("/dashboard/users")
+            } else {
+                toast.error("Not update")
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         getOneUser()
     }, [])
@@ -43,7 +69,7 @@ export default function EditUser() {
                     <div className="row d-flex align-items-center justify-content-center">
                         <div className="col-12 col-lg-6">
                             <div>
-                                <form >
+                                <form onSubmit={handleUpdate}>
                                     <div className="row">
                                         <div className="col">
                                             <label htmlFor='userName'>UserName</label><br />

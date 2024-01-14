@@ -11,7 +11,7 @@ const errorMiddleware = require("./middlewares/errorMiddleware");
 
 const corsoptions = {
     origin: "http://localhost:5173",
-    methods: "GET,POST,PUT,DELETE",
+    methods: "GET,POST,PUT,DELETE,PATCH",
     Credentials: true
 }
 app.use(cors(corsoptions));
