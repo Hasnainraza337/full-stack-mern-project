@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Button } from 'antd';
 import { useParams, useNavigate } from "react-router-dom"
 import { useAuthContext } from '../../../contexts/AuthContext';
+import { useDataContext } from '../../../contexts/DataContext';
 import { toast } from "react-toastify"
 
 const initialState = { userName: "", email: "", phone: "" }
@@ -9,6 +10,8 @@ const initialState = { userName: "", email: "", phone: "" }
 export default function EditUser() {
     const [state, setState] = useState(initialState)
     const { authorizationToken } = useAuthContext()
+    const { getAllUsers } = useDataContext()
+
     const params = useParams()
     const navigate = useNavigate()
 
@@ -51,6 +54,7 @@ export default function EditUser() {
             if (response.ok) {
                 toast.success("User update successfully")
                 navigate("/dashboard/users")
+                getAllUsers()
             } else {
                 toast.error("Not update")
             }

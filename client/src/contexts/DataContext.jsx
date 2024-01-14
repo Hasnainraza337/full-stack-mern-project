@@ -91,8 +91,9 @@ export const DataContextProvider = ({ children }) => {
         getAllContacts()
     }, [])
 
+
     return (
-        <DataContext.Provider value={{ users, contacts, deleteUser, deleteContact }}>
+        <DataContext.Provider value={{ users, contacts, deleteUser, deleteContact, getAllUsers }}>
             {children}
         </DataContext.Provider>
     )
