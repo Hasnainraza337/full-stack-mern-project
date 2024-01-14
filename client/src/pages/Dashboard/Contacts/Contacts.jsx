@@ -5,47 +5,47 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { LuMenu } from "react-icons/lu";
 import { useDataContext } from '../../../contexts/DataContext';
 
-const columns = [
-    {
-        title: 'Sr',
-        dataIndex: 'sr',
-        key: 'sr',
-    },
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-        render: (text) => <a>{text}</a>,
-    },
-    {
-        title: 'Email',
-        dataIndex: 'email',
-        key: 'email',
-    },
-    {
-        title: 'Message',
-        dataIndex: 'message',
-        key: 'message',
-    },
 
-    {
-        title: 'Action',
-        key: 'action',
-        render: () => {
-            return (
-                <div>
-                    <Button type='primary' style={{ borderRadius: 5 }}><EditOutlined style={{ fontSize: 20 }} /></Button>
-                    <Button type='primary' danger style={{ marginLeft: 5, borderRadius: 5 }}><DeleteOutlined style={{ fontSize: 20 }} /></Button>
-                </div>
-            )
-        },
-
-    },
-];
 
 export default function Contacts() {
-    const { contacts } = useDataContext();
+    const { contacts, deleteContact } = useDataContext();
 
+    const columns = [
+        {
+            title: 'Sr',
+            dataIndex: 'sr',
+            key: 'sr',
+        },
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+            render: (text) => <a>{text}</a>,
+        },
+        {
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
+        },
+        {
+            title: 'Message',
+            dataIndex: 'message',
+            key: 'message',
+        },
+
+        {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => {
+                return (
+                    <div>
+                        <Button type='primary' danger onClick={() => deleteContact(record.contactId)} style={{ borderRadius: 5 }}><DeleteOutlined style={{ fontSize: 20 }} /></Button>
+                    </div>
+                )
+            },
+
+        },
+    ]; ``
 
     const data = contacts.map((contact, i) => {
         return {
@@ -54,6 +54,7 @@ export default function Contacts() {
             name: contact.userName,
             email: contact.email,
             message: contact.message,
+            contactId: contact._id
         }
     })
 

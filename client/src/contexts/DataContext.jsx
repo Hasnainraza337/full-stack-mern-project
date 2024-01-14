@@ -68,6 +68,23 @@ export const DataContextProvider = ({ children }) => {
             console.log(error)
         }
     }
+    // Contact delete
+    const deleteContact = async (contactId) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/admin/contacts/delete/${contactId}`, {
+                method: "DELETE",
+                headers: {
+                    Authorization: authorizationToken,
+                }
+            })
+            if (response.ok) {
+                toast.success("Contact deleted successfully")
+                getAllContacts()
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
         getAllUsers()
@@ -75,7 +92,7 @@ export const DataContextProvider = ({ children }) => {
     }, [])
 
     return (
-        <DataContext.Provider value={{ users, contacts, deleteUser }}>
+        <DataContext.Provider value={{ users, contacts, deleteUser, deleteContact }}>
             {children}
         </DataContext.Provider>
     )
