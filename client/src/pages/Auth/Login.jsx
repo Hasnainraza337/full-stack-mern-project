@@ -31,7 +31,7 @@ export default function Login() {
       })
       const res_data = await response.json();
       if (response.ok) {
-        console.log(res_data)
+        // console.log(res_data)
         storeTokenInLs(res_data.token)
         form.resetFields();
         toast.success("Login Successfull")

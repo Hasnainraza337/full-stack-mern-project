@@ -3,9 +3,11 @@ import React from 'react'
 import { AppstoreOutlined, UserOutlined, ContactsOutlined, HomeOutlined } from "@ant-design/icons"
 import { useLocation, useNavigate } from 'react-router-dom'
 
+
 export default function Sider({ selectedKey, openKeys }) {
     const navigate = useNavigate();
     const location = useLocation();
+
     return (
         <>
             <Menu
@@ -45,6 +47,8 @@ export default function Sider({ selectedKey, openKeys }) {
                         label: "Home",
                     },
                 ]} />
+
+
         </>
     )
 }

@@ -3,7 +3,9 @@ import { Link } from 'react-router-dom'
 import { useAuthContext } from '../../contexts/AuthContext'
 
 export default function Navbar() {
-    const { isLoggedIn } = useAuthContext();
+    const { isLoggedIn, user, } = useAuthContext();
+
+
     return (
         <>
             <header>
@@ -18,9 +20,11 @@ export default function Navbar() {
                                 <li className="nav-item">
                                     <Link to="/" className="nav-link active">Home</Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/dashboard" className="nav-link">Dashboard</Link>
-                                </li>
+                                {user.isAdmin &&
+                                    <li className="nav-item">
+                                        <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                                    </li>
+                                }
                                 <li className="nav-item">
                                     <Link to="/about" className="nav-link" >About</Link>
                                 </li>
