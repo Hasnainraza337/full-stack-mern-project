@@ -11,17 +11,20 @@ export const AuthContextProvider = ({ children }) => {
     const [isLoading, setIsLoading] = useState(true)
     const authorizationToken = `Bearer ${token}`
 
+
     const storeTokenInLs = (serverToken) => {
         setToken(serverToken)
         return localStorage.setItem("token", serverToken)
     }
 
     const isLoggedIn = !!token;
-    console.log(isLoggedIn)
+    // console.log(isLoggedIn)
 
+    // console.log(user.isAdmin)
     // user logout
     const userLogout = () => {
         setToken("");
+        user.isAdmin = undefined
         return localStorage.removeItem("token")
     }
 
@@ -52,7 +55,7 @@ export const AuthContextProvider = ({ children }) => {
 
     useEffect(() => {
         userAuthentication()
-    }, [])
+    }, [isLoggedIn])
 
 
     return (
