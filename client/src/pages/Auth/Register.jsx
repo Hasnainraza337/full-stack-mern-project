@@ -7,17 +7,18 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { toast } from 'react-toastify';
 
 const initialState = { userName: "", email: "", phone: "", Password: "" };
-const URL = "http://localhost:8000/api/auth/register"
 
 export default function Register() {
   const [state, setState] = useState(initialState)
   const navigate = useNavigate();
-  const { storeTokenInLs } = useAuthContext();
+  const { storeTokenInLs, API } = useAuthContext();
   const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState(s => ({ ...s, [name]: value }))
   }
+
+  const URL = `${API}/api/auth/register`
 
   const handleRegister = async () => {
     try {

@@ -7,14 +7,14 @@ import { toast } from "react-toastify"
 const DataContext = createContext();
 
 export const DataContextProvider = ({ children }) => {
-    const { authorizationToken } = useAuthContext();
+    const { authorizationToken, API} = useAuthContext();
     const [users, setUsers] = useState([])
     const [contacts, setContacts] = useState([])
 
     // get all users
     const getAllUsers = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/admin/users", {
+            const response = await fetch(`${API}/api/admin/users`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken,
@@ -33,7 +33,7 @@ export const DataContextProvider = ({ children }) => {
     // user delete
     const deleteUser = async (userId) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/admin/users/delete/${userId}`, {
+            const response = await fetch(`${API}/api/admin/users/delete/${userId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: authorizationToken,
@@ -53,7 +53,7 @@ export const DataContextProvider = ({ children }) => {
     // get all contacts
     const getAllContacts = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/admin/contacts", {
+            const response = await fetch(`${API}/api/admin/contacts`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken,
@@ -71,7 +71,7 @@ export const DataContextProvider = ({ children }) => {
     // Contact delete
     const deleteContact = async (contactId) => {
         try {
-            const response = await fetch(`http://localhost:8000/api/admin/contacts/delete/${contactId}`, {
+            const response = await fetch(`${API}/api/admin/contacts/delete/${contactId}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: authorizationToken,

@@ -5,12 +5,15 @@ import { useContext } from "react";
 
 const AuthContext = createContext();
 
+
+
 export const AuthContextProvider = ({ children }) => {
     const [token, setToken] = useState(localStorage.getItem("token"))
     const [user, setUser] = useState("")
     const [isLoading, setIsLoading] = useState(true)
     const authorizationToken = `Bearer ${token}`
 
+    const API = import.meta.env.VITE_HOST_URL;
 
     const storeTokenInLs = (serverToken) => {
         setToken(serverToken)
@@ -34,7 +37,7 @@ export const AuthContextProvider = ({ children }) => {
     const userAuthentication = async () => {
         try {
             setIsLoading(true)
-            const response = await fetch("http://localhost:8000/api/auth/user", {
+            const response = await fetch(`${API}/api/auth/user`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken
@@ -59,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
 
 
     return (
-        <AuthContext.Provider value={{ isLoggedIn, isLoading, storeTokenInLs, userLogout, user, authorizationToken }}>
+        <AuthContext.Provider value={{ isLoggedIn, isLoading, storeTokenInLs, userLogout, user, authorizationToken, API }}>
             {children}
         </AuthContext.Provider>
     )

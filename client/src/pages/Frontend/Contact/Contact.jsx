@@ -6,13 +6,12 @@ import { toast } from 'react-toastify';
 
 
 const initialState = { userName: "", email: "", message: "" }
-const URL = "http://localhost:8000/api/form/contact"
 
 export default function Contact() {
   // const [form] = Form.useForm()
   const [state, setState] = useState(initialState)
   const [userData, setUserData] = useState(true)
-  const { user } = useAuthContext();
+  const { user, API } = useAuthContext();
 
   if (userData && user) {
     setState({
@@ -23,6 +22,7 @@ export default function Contact() {
 
     setUserData(false)
   }
+  const URL = `${API}/api/form/contact`
 
   const handleChange = (e) => {
     const { name, value } = e.target;

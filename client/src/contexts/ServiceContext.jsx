@@ -1,15 +1,17 @@
 import React, { createContext, useEffect, useState } from "react"
 import { useContext } from "react";
+import { useAuthContext } from "./AuthContext";
 
 
 const ServiceContext = createContext();
 
 export const ServiceContextProvider = ({ children }) => {
     const [serviceData, setServiceData] = useState([])
+    const { API } = useAuthContext()
 
     const services = async () => {
         try {
-            const response = await fetch("http://localhost:8000/api/data/service")
+            const response = await fetch(`${API}/api/data/service`)
             if (response.ok) {
                 const data = await response.json()
                 setServiceData(data.response)

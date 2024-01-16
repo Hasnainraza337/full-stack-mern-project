@@ -7,17 +7,18 @@ import { useAuthContext } from '../../contexts/AuthContext';
 import { toast } from "react-toastify"
 
 const initialState = { email: "", Password: "" };
-const URL = "http://localhost:8000/api/auth/login"
 
 export default function Login() {
   const [state, setState] = useState(initialState)
   const navigate = useNavigate();
-  const { storeTokenInLs } = useAuthContext();
+  const { storeTokenInLs, API } = useAuthContext();
   const [form] = Form.useForm();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState(s => ({ ...s, [name]: value }))
   }
+
+  const URL = `${API}/api/auth/login`
 
   const handleLogin = async () => {
     try {

@@ -9,7 +9,7 @@ const initialState = { userName: "", email: "", phone: "" }
 
 export default function EditUser() {
     const [state, setState] = useState(initialState)
-    const { authorizationToken } = useAuthContext()
+    const { authorizationToken,API } = useAuthContext()
     const { getAllUsers } = useDataContext()
 
     const params = useParams()
@@ -23,7 +23,7 @@ export default function EditUser() {
     // get sinlge user
     const getOneUser = async () => {
         try {
-            const response = await fetch(`http://localhost:8000/api/admin/users/${params.id}`, {
+            const response = await fetch(`${API}/api/admin/users/${params.id}`, {
                 method: "GET",
                 headers: {
                     Authorization: authorizationToken,
@@ -43,7 +43,7 @@ export default function EditUser() {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`http://localhost:8000/api/admin/users/update/${params.id}`, {
+            const response = await fetch(`${API_URL}/api/admin/users/update/${params.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
