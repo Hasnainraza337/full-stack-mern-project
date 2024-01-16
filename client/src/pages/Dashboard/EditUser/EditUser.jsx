@@ -9,7 +9,7 @@ const initialState = { userName: "", email: "", phone: "" }
 
 export default function EditUser() {
     const [state, setState] = useState(initialState)
-    const { authorizationToken,API } = useAuthContext()
+    const { authorizationToken, API } = useAuthContext()
     const { getAllUsers } = useDataContext()
 
     const params = useParams()
@@ -43,7 +43,7 @@ export default function EditUser() {
     const handleUpdate = async (e) => {
         e.preventDefault()
         try {
-            const response = await fetch(`${API_URL}/api/admin/users/update/${params.id}`, {
+            const response = await fetch(`${API}/api/admin/users/update/${params.id}`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
